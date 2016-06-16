@@ -11,8 +11,6 @@ SNORT rules are translated in best effort approach, discriminating 3 cases:
 -    rules that can't be translated.
 
 
-It defines classes_and_methods
-
 @author:     Esposito A. - Ocone L. - Pino L.
 
 @copyright:  2016 s2ipt_security_team. All rights reserved.
@@ -33,8 +31,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-@contact:    user_email
-@deffield    updated: Updated
+@contact:    alessandro.espo91@gmail.com - oconeluciano84@gmail.com - pinoluigi@hotmail.com
+@deffield    updated: 16-06-2016
 '''
 
 from argparse import ArgumentParser
@@ -62,9 +60,9 @@ from utils import Constants
 
 
 __all__ = []
-__version__ = 0.1
-__date__ = '2016-02-03'
-__updated__ = '2016-02-03'
+__version__ = 1.0
+__date__ = '03-02-2016'
+__updated__ = '16-06-2016'
 
 DEBUG = 1
 TESTRUN = 0
@@ -328,30 +326,12 @@ USAGE
         ### handle keyboard interrupt ###
         return 0
     except Exception, e:
-        if DEBUG or TESTRUN:
-            raise(e)
+#        if DEBUG or TESTRUN
+        raise(e)
         indent = len(program_name) * " "
         sys.stderr.write(program_name + ": " + repr(e) + "\n")
         sys.stderr.write(indent + "  for help use --help")
         return 2
 
 if __name__ == "__main__":
-#     if DEBUG:
-#         sys.argv.append("-h")
-#         sys.argv.append("-v")
-#         sys.argv.append("-r")
-#     if TESTRUN:
-#         import doctest
-#         doctest.testmod()
-#     if PROFILE:
-#         import cProfile
-#         import pstats
-#         profile_filename = 'engine.s2ipt_profile.txt'
-#         cProfile.run('main()', profile_filename)
-#         statsfile = open("profile_stats.txt", "wb")
-#         p = pstats.Stats(profile_filename, stream=statsfile)
-#         stats = p.strip_dirs().sort_stats('cumulative')
-#         stats.print_stats()
-#         statsfile.close()
-#         sys.exit(0)
     sys.exit(main())

@@ -12,14 +12,11 @@ enabled_option = ""         #enabled option from command line
 from_value = 0
 to_value = 0
 comment = ''
-#content_present = ''
 
 #main function that translates a single Snort rule into iptables one
 def translate(s_rule_string, interface, chain, enabled):
     global enabled_option
     global protocol
-#    global content_present
-#    content_present=False
     protocol = ''
     enabled_option = enabled
     ip_rule = ""
@@ -36,7 +33,7 @@ def translate(s_rule_string, interface, chain, enabled):
     
     #checking if pcre option can be translated
     proceed = True
-    if(Constants.PCRE in s_rule_string):
+    if(Constants.PCRE+":\"" in s_rule_string):
         proceed = pre_process_pcre(s_rule.options.options)
         if(proceed == False):
             tr_rule = RuleClasses.TranslationResult(Constants.NOT_TRANSLATED_PCRE, False, sid)
@@ -46,11 +43,11 @@ def translate(s_rule_string, interface, chain, enabled):
             
     #checking if content option is present
     proceed = True
-    if(Constants.CONTENT in s_rule_string):
-        proceed = pre_process_content(s_rule.options.options)
-        if(proceed==False):
-            tr_rule = RuleClasses.TranslationResult(Constants.NOT_TRANSLATED_NO_CONTENT_OPTION, False, sid)
-            return tr_rule
+
+    proceed = pre_process_content(s_rule.options.options)
+    if(proceed==False):
+        tr_rule = RuleClasses.TranslationResult(Constants.NOT_TRANSLATED_NO_CONTENT_OPTION, False, sid)
+        return tr_rule
         
     #header translation
     ip_header = translate_header(s_rule.header, interface, chain)
@@ -374,13 +371,12 @@ def pre_process_pcre(options):
             opt_value = opt_split[1]
             if(opt_key.lower() == Constants.PCRE.lower()):
                 #check if '\a', '\f' or '\e' are in the pcre regex
-                if('\a' or '\f' or '\e' in opt_value.lower()):
+                if('\\a' or '\\f' or '\\e' in opt_value.lower()):
                     return False
                 #check if '\ddd' is in the pcre regex
                 matched = re.findall("\\\\[d]\d*",opt_value)
                 if(len(matched)>0):
                     return False
-
             else: 
                 pass
     return True

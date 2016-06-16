@@ -4,7 +4,7 @@
 
 BASE_DIR = "/opt/s2ipt"                         #caso reale
 LOGS_DIR = "logs"
-BACKUP_DIR = "backup"
+BACKUP_DIR = "backups"
 IPTABLES_BACKUP = "iptables_backup"
 CONF_DIR = "conf"
 PROP_FILE = "config.properties"
