@@ -56,10 +56,12 @@ else
 fi
 
 DATE=$(date +%j)
+YEAR=$(date +%Y)
 
 sudo echo '# s2ipt-daemon configuration file
 # please do NOT modify this auto-generated file
 last_update='$DATE > $FILENAME
+sudo echo 'update_year='$YEAR >> $FILENAME
 
 # extracting files from archive
 echo "extracting community rules from archive..."

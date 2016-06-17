@@ -71,5 +71,6 @@ then
 	sudo echo '# s2ipt-daemon configuration file
 # please do NOT modify this auto-generated file
 last_update='$DATE > $DAEMON_CONFIG
+	sudo echo 'update_year='$YEAR >> $DAEMON_CONFIG
 
 fi
