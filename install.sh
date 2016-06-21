@@ -190,7 +190,6 @@ fi
 
 # backup of iptables rules
 echo "executing backup of current iptables rules..."
-touch /opt/s2ipt/backups/iptables_backup
 sudo iptables-save > /opt/s2ipt/backups/iptables-pre-s2ipt-backup
 if [ $? -eq 0 ]; then
 	echo "backup successful"

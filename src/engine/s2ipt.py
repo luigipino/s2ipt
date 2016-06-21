@@ -78,9 +78,7 @@ class CLIError(Exception):
     def __unicode__(self):
         return self.msg
 
-def revert_function():
-    subprocess.call("sudo iptables-restore < "+Constants.BASE_DIR+"/backups/iptables-pre-s2ipt-backup",shell=True)
-    
+def revert_function():    
     #remove jump to custom chain if it doesn't exist, try for both IDS and IPS
     #removing jump to IDS...
     out = subprocess.call("sudo iptables -C INPUT -j IDS 2> /dev/null", shell=True)
@@ -108,10 +106,20 @@ def revert_function():
     if(int(out)==0):
         subprocess.call("sudo iptables -D FORWARD -j IPS 2> /dev/null", shell=True)
         
+    #flushing rules on custom chains
+    subprocess.call("sudo iptables -F IDS 2> /dev/null",shell=True)
+    subprocess.call("sudo iptables -F IPS 2> /dev/null",shell=True)
+    
+    #deleting custom chains 
+    subprocess.call("sudo iptables -X IDS 2> /dev/null",shell=True)
+    subprocess.call("sudo iptables -X IPS 2> /dev/null",shell=True)
+    subprocess.call("sudo iptables-restore < "+Constants.BASE_DIR+"/backups/iptables-pre-s2ipt-backup",shell=True)
+    subprocess.call("sudo rm "+Constants.BASE_DIR+"/backups/iptables-s2ipt-backup 2> /dev/null",shell=True)
+
     #restoring config file, setting 0 read rules
     conf_file = Constants.BASE_DIR+"/"+Constants.CONF_DIR+"/"+Constants.PROP_FILE
-    f_output = open(conf_file, 'a')
-    f_output.write(Constants.CONFIG_SECTION_NAME+"\n")
+    f_output = open(conf_file, 'w')
+    f_output.write("["+Constants.CONFIG_SECTION_NAME+"]\n")
     f_output.write(Constants.CONFIG_PROPERTY_NAME+" = 0")
     f_output.close()        
     return
@@ -170,7 +178,7 @@ USAGE
     try:        
         # Setup argument parser
         parser = ArgumentParser(description=program_license, formatter_class=RawDescriptionHelpFormatter)
-        parser.add_argument("--iface", dest='iface',required=True, metavar='IFACE', help="specifies the interface to apply iptables rules")
+        parser.add_argument("--iface", dest='iface', metavar='IFACE', help="specifies the interface to apply iptables rules")
         group = parser.add_mutually_exclusive_group()
         group.add_argument("--log", dest='log', action='store_true', help="makes iptables rules to log the matched packets, this is assumed as default")
         group.add_argument('--drop', dest='drop', action='store_true', help="makes iptables rules to drop the matched packets")
@@ -286,14 +294,14 @@ USAGE
                         f_output.write("Rule with sid "+result.sid+" SKIPPED: too generic rule, no CONTENT to match \n")
                         pass
                     else:
-                        temp_rule = result.rule + " -j LOG --log-prefix ["+custom_chain+"-"+result.sid+"]"
-                        subprocess.call("sudo "+temp_rule, shell=True)
                         if(drop==True):
                             temp_rule = result.rule + " -j DROP"
                             subprocess.call("sudo "+temp_rule, shell=True)
                         elif(reject==True):
                             temp_rule = result.rule + " -j REJECT"
                             subprocess.call("sudo "+temp_rule, shell=True)
+                        temp_rule = result.rule + " -j LOG --log-prefix ["+custom_chain+"-"+result.sid+"]"
+                        subprocess.call("sudo "+temp_rule, shell=True)
                         translated_rules = translated_rules+1
                         if(result.best_effort == True):
                             best_effort = best_effort + 1
