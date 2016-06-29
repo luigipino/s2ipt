@@ -1,5 +1,14 @@
 This is s2ipt tool README file. <br/><br/>
-s2ipt is a lightweight python-engine whose aim is to translate Snort community rules into iptables ones. <br/>
+s2ipt is a lightweight python-engine whose aim is to translate Snort community rules into iptables ones. <br/><br/>
+The Team:
+
+Luigi Pino (University of Sannio BN IT)
+Luciano Ocone (University of Sannio BN IT)
+Alessandro Esposito (University of Sannio BN IT)
+Team Leader: Ing. Antonio Pirozzi (University of Sannio BN IT)
+Supervisor: Prof. Aaron C. Visaggio (University of Sannio BN IT)
+
+
 First of all, you have to run './install.sh' script to set up the environment for s2ipt, as superuser. <br/><br/>
 	**# ./install.sh** <br/><br/>
 If your system doesn't recognize the script as executable, run 'chmod +x install.sh' and then retry. <br/><br/>
@@ -16,5 +25,5 @@ In order to restore the iptables backup created before 's2ipt' execution, use '-
 You can also run 's2ipt' only specifying the interface, assuming '--log' as default. <br/><br/>
 For more information run 's2ipt --help'. <br/><br/>
 	**# s2ipt --help** <br/><br/>
-The 's2ipt-daemon.sh' is an utility that automatically checks for most recent Snort community-rules according to the interval set in 'daemon/s2ipt-update.config' file..
+The 's2ipt-daemon.sh' is an utility that automatically checks for most recent Snort community-rules according to the interval set in 'daemon/s2ipt-update.config' file.
 
