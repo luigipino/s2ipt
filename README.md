@@ -16,5 +16,5 @@ In order to restore the iptables backup created before 's2ipt' execution, use '-
 You can also run 's2ipt' only specifying the interface, assuming '--log' as default. <br/><br/>
 For more information run 's2ipt --help'. <br/><br/>
 	**# s2ipt --help** <br/><br/>
-The 's2ipt-daemon.sh' is an utility that automatically checks for most recent Snort community-rules according to the interval set in 'daemon/s2ipt-update.config' file.
+The 's2ipt-daemon.sh' is an utility that automatically checks for most recent Snort community-rules according to the interval set in 'daemon/s2ipt-update.config' file..
 
