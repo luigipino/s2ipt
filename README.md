@@ -2,11 +2,11 @@ This is s2ipt tool README file. <br/><br/>
 s2ipt is a lightweight python-engine whose aim is to translate Snort community rules into iptables ones. <br/><br/>
 The Team:
 
-Luigi Pino (University of Sannio BN IT)
-Luciano Ocone (University of Sannio BN IT)
-Alessandro Esposito (University of Sannio BN IT)
-Team Leader: Ing. Antonio Pirozzi (University of Sannio BN IT)
-Supervisor: Prof. Aaron C. Visaggio (University of Sannio BN IT)
+Luigi Pino (University of Sannio BN IT)<br/>
+Luciano Ocone (University of Sannio BN IT)<br/>
+Alessandro Esposito (University of Sannio BN IT)<br/>
+Team Leader: Ing. Antonio Pirozzi (University of Sannio BN IT)<br/>
+Supervisor: Prof. Aaron C. Visaggio (University of Sannio BN IT)<br/>
 
 
 First of all, you have to run './install.sh' script to set up the environment for s2ipt, as superuser. <br/><br/>
