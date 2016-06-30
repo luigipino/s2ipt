@@ -1,5 +1,5 @@
 s2ipt - a lightweight python-tool that translates SNORT community rules into iptables ones
-Copyright (C) 2016  Esposito A. - Ocone L. - Pino L.
+Copyright (C) 2016  Esposito A. - Ocone L. - Pino L. - Pirozzi A. - Visaggio A.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
