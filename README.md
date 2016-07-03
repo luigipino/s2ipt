@@ -1,4 +1,7 @@
 #s2ipt IDS/IPS<br/><br/>
+<p align="center">
+  <img src="http://www.iswatlab.eu/wp-content/uploads/2016/07/logo.png" width="350"/>
+</p>
 ##s2ipt is a lightweight python-powered Netfilter IDS/IPS whose aim is to translate Snort community rules into iptables ones. <br/><br/>
 
 **The Team:**
